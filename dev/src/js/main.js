@@ -1,15 +1,11 @@
-// Authors: %Author Name%
+let a = 1;
 
-$(function() {
-
-
-  if ($('html').hasClass('-device_desktop')) {
-
+class ASD {
+  constructor() {
+    console.log(123);
   }
-});
-$(window).on('resize', function() {
-
-});
-$(window).on('load', function() {
-
-});
+  
+  tytyty() {
+    return '123';
+  }
+}
