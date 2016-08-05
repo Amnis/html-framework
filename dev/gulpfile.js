@@ -2,21 +2,22 @@
 
 const gulp = require('gulp'),
       del = require('del'),
-      plumber = require('gulp-plumber'),
+      addsrc = require('gulp-add-src'),
       notify = require('gulp-notify'),
+      plumber = require('gulp-plumber'),
+      sourcemaps = require('gulp-sourcemaps'),
       uglify = require('gulp-uglify'),
       compass = require('gulp-compass'),
-      prefixer = require('gulp-autoprefixer'),
-      cssnano = require('gulp-cssnano'),
+      postcss = require('gulp-postcss'),
+        autoprefixer = require('autoprefixer'),
+        cssnano = require('cssnano'),
+        pixrem = require('pixrem'),
       csslint = require('gulp-csslint'),
-      pixrem = require('gulp-pixrem'),
       concat = require('gulp-concat'),
-      addsrc = require('gulp-add-src'),
+      babel = require('gulp-babel'),
       jshint = require('gulp-jshint'),
       jscs = require('gulp-jscs'),
-      babel = require('gulp-babel'),
-      stylish = require('gulp-jscs-stylish'),
-      sourcemaps = require('gulp-sourcemaps'),
+        stylish = require('gulp-jscs-stylish'),
       imagemin = require('gulp-imagemin'),
       pngquant = require('imagemin-pngquant'),
       imageDataURI = require('gulp-image-data-uri');
@@ -59,10 +60,24 @@ gulp.task('css', function() {
         relative: true,
         sourcemap: true
       }))
-      .pipe(pixrem())
-//      .pipe(prefixer())
       .pipe(csslint())
-//      .pipe(cssnano())
+      .pipe(postcss([
+        pixrem(),
+        autoprefixer({
+          browsers: [
+            'last 3 version',
+            'ie 8',
+            'ff 3.6',
+            'opera 11.1',
+            'ios 4',
+            'android 2.3',
+          ]
+        }),
+        cssnano({
+          convertValues: false,
+          zindex: false
+        })
+      ]))
       .pipe(concat('main.css'))
     .pipe(sourcemaps.write(dir.output.sourcemaps))
     .pipe(gulp.dest(dir.output.css));
