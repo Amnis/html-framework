@@ -3,7 +3,8 @@
   "version": "1.6.1",
   "description": "Our HTML5 boilerplate",
   "devDependencies": {
-    "babel-preset-es2015": "^6.13.1",
+    "babel-preset-es2015": "^6.13.2",
+    "del": "^2.2.1",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-add-src": "^0.2.0",
     "gulp-autoprefixer": "^3.1.0",
@@ -12,6 +13,7 @@
     "gulp-concat": "^2.6.0",
     "gulp-csslint": "^0.3.1",
     "gulp-cssnano": "^2.1.2",
+    "gulp-image-data-uri": "^1.2.2",
     "gulp-imagemin": "^3.0.2",
     "gulp-jscs": "^4.0.0",
     "gulp-jscs-stylish": "^1.4.0",
@@ -26,7 +28,9 @@
     "jshint": "^2.9.2",
     "jshint-stylish": "^2.2.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "gulp": "github:gulpjs/gulp#4.0"
+  },
   "scripts": {},
   "author": {
     "name": "iDeus",

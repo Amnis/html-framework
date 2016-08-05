@@ -51,19 +51,19 @@ gulp.task('css', function() {
   return gulp.src([dir.input.sass.custom])
     .pipe(plumber({errorHandler: notify.onError()}))
     .pipe(sourcemaps.init())
-    .pipe(compass({
-    sass: dir.input.sass.all,
-    css: dir.output.css,
-    image:  'testimg',
-    style: 'expanded',
-    relative: true,
-    sourcemap: true
-  }))
-    .pipe(pixrem())
-    .pipe(prefixer())
-    .pipe(csslint())
-    .pipe(cssnano())
-    .pipe(concat('main.css'))
+      .pipe(compass({
+        sass: dir.input.sass.all,
+        css: dir.output.css,
+        image:  'testimg',
+        style: 'expanded',
+        relative: true,
+        sourcemap: true
+      }))
+      .pipe(pixrem())
+//      .pipe(prefixer())
+      .pipe(csslint())
+//      .pipe(cssnano())
+      .pipe(concat('main.css'))
     .pipe(sourcemaps.write(dir.output.sourcemaps))
     .pipe(gulp.dest(dir.output.css));
 });
@@ -94,7 +94,8 @@ gulp.task('img', function() {
       progressive: true,
       use: [pngquant()],
       interlaced: true
-    }));
+    }))
+    .pipe(gulp.dest(dir.output.img));
   
   return gulp.src(dir.input.img + '/base64/*.*', {since: gulp.lastRun('img')})
     .pipe(imageDataURI({
